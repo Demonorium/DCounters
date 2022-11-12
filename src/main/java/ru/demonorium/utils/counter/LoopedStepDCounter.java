@@ -14,7 +14,7 @@ public class LoopedStepDCounter extends SimpleStepDCounter implements Serializab
     public long inc() {
         if (isEnd()) {
             reset();
-            return getValue();
+            return get();
         } else {
             return super.inc();
         }

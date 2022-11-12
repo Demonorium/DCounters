@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class DCounterTest {
     void testCounterDirect(DCounter counter, long step) {
-        long acc = counter.getValue();
+        long acc = counter.get();
         while (!counter.incAndTest()) {
             acc += step;
         }

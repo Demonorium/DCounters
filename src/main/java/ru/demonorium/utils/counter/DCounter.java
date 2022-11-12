@@ -1,9 +1,11 @@
 package ru.demonorium.utils.counter;
 
+import java.util.function.Supplier;
+
 /**
  * Simple interface for simple counters
  */
-public interface DCounter {
+public interface DCounter extends Supplier<Long> {
     /**
      * Max value of counter
      *
@@ -16,7 +18,7 @@ public interface DCounter {
      *
      * @return current value
      */
-    long getValue();
+    Long get();
 
     /**
      * Increment and get new value of counter
@@ -31,7 +33,7 @@ public interface DCounter {
      * @return true if counter reaches maxValue
      */
     default boolean isEnd() {
-        return getValue() >= getMaxValue();
+        return get() >= getMaxValue();
     }
 
     /**
@@ -40,7 +42,7 @@ public interface DCounter {
      * @return false if counter reaches maxValue
      */
     default boolean isNotEnd() {
-        return getValue() < getMaxValue();
+        return get() < getMaxValue();
     }
 
     /**

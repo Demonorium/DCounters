@@ -14,7 +14,7 @@ public class LoopedDCounter extends SimpleDCounter implements Serializable {
     public long inc() {
         if (isEnd()) {
             reset();
-            return getValue();
+            return get();
         } else {
             return super.inc();
         }

@@ -62,7 +62,7 @@ public class DCounterListener implements DCounter, Serializable {
     }
 
     @Override
-    public long getValue() {
-        return counter.getValue();
+    public Long get() {
+        return counter.get();
     }
 }

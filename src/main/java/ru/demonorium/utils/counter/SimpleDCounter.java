@@ -20,7 +20,7 @@ public class SimpleDCounter implements DCounter, Serializable {
     }
 
     @Override
-    public long getValue() {
+    public Long get() {
         return value;
     }
 
