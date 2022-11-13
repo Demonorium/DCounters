@@ -1,19 +1,21 @@
 package ru.demonorium.utils.counter;
 
+import ru.demonorium.concepts.function.procv.ProcedureA1V;
+
 import java.io.Serializable;
 import java.util.function.Consumer;
 
 public class DCounterListener implements DCounter, Serializable {
     private DCounter counter;
-    private Consumer<DCounter> onEnd;
-    private Consumer<DCounter> onInc;
+    private ProcedureA1V<DCounter> onEnd;
+    private ProcedureA1V<DCounter> onInc;
 
-    public <T extends Serializable & Consumer<DCounter>> DCounterListener(DCounter counter, T onEnd) {
+    public <T extends Serializable & ProcedureA1V<DCounter>> DCounterListener(DCounter counter, T onEnd) {
         this.counter = counter;
         this.onEnd = onEnd;
     }
 
-    public <T1 extends Serializable & Consumer<DCounter>, T2 extends Serializable & Consumer<DCounter>> DCounterListener(DCounter counter, T1 onEnd, T2 onInc) {
+    public <T1 extends Serializable & ProcedureA1V<DCounter>, T2 extends Serializable & ProcedureA1V<DCounter>> DCounterListener(DCounter counter, T1 onEnd, T2 onInc) {
         this.counter = counter;
         this.onEnd = onEnd;
         this.onInc = onInc;
@@ -24,27 +26,27 @@ public class DCounterListener implements DCounter, Serializable {
         long value = counter.inc();
 
         if (value >= getMaxValue()) {
-            onEnd.accept(counter);
+            onEnd.call(counter);
         } else {
-            onInc.accept(counter);
+            onInc.call(counter);
         }
 
         return value;
     }
 
-    public Consumer<DCounter> getOnEnd() {
+    public ProcedureA1V<DCounter> getOnEnd() {
         return onEnd;
     }
 
-    public void setOnEnd(Consumer<DCounter> onEnd) {
+    public void setOnEnd(ProcedureA1V<DCounter> onEnd) {
         this.onEnd = onEnd;
     }
 
-    public Consumer<DCounter> getOnInc() {
+    public ProcedureA1V<DCounter> getOnInc() {
         return onInc;
     }
 
-    public void setOnInc(Consumer<DCounter> onInc) {
+    public void setOnInc(ProcedureA1V<DCounter> onInc) {
         this.onInc = onInc;
     }
 
